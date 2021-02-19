@@ -9,6 +9,7 @@
 - Mongoose (Model/Mongo ODM)
 - Mongodb/Atlas (Offline/Online Database bằng MongoDB)
 - PassportJS (Xác thực tài khoản)
+- Express-validator (Middleware xác minh dữ liệu tại Backend)
 ### Môi trường deploy: HEROKU + MONGODB ATLAS
 ### SCREENSHOT:
 ![PC screenshot](https://raw.githubusercontent.com/justforlrn/node-bank/master/public/images/app-screenshot/PC.png?v=4&s=200)
