@@ -2,22 +2,26 @@ var router = require('express').Router();
 var BankAccountModel = require('../models/bank-account');
 var UserModel = require('../models/user');
 
+var checkLogin = function (req, res, next) {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  next();
+};
+
+router.use('/', checkLogin);
+
 router
   .route('/')
   .get((req, res, next) => {
-    // if (!req.user) return res.redirect('/');
-    // else
-    // return res.render('transfer', {
-    //   title: 'Transfer',
-    //   hasError: false,
-    //   transfer: false,
-    // });
-    //CBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-    UserModel.findOne({ email: 'email@email.com' }, '_id')
-      .populate('bankAccount', '_id balance transfers')
+    UserModel.findOne({ email: req.user.email }, '_id name')
+      .populate('bankAccount', '_id number balance transfers')
       .exec((err, account) => {
         res.render('transfer', {
           title: 'Transfer',
+          name: account.name,
+          number: account.bankAccount.number,
+          balance: account.bankAccount.balance,
           hasError: false,
           transfer: account.bankAccount.transfers.length > 0 ? true : false,
           transfers: account.bankAccount.transfers,
@@ -34,8 +38,7 @@ router
         console.log(toAccount);
         if (err) console.log(err);
         toAccount.balance += transferValue;
-        //CBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-        UserModel.findOne({ email: 'email1@email.com' }, '_id')
+        UserModel.findOne({ email: req.user.email }, '_id')
           .populate('bankAccount', '_id number balance transfers')
           .exec(function (err, fromAccount) {
             console.log('fromAccount');

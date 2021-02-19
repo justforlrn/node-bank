@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var BankAccountModel = require('./bank-account');
 const bcrypt = require('bcryptjs');
 
 var UserSchema = new Schema(
@@ -31,21 +30,6 @@ UserSchema.pre('save', function (next) {
   if (this.isModified('password') || this.isNew) {
     user.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
   }
-
-  // BankAccountModel.create(
-  //   {
-  //     number: Math.floor(Math.random() * 8999999999) + 1000000000,
-  //     holdName: user._id,
-  //     balance: 0,
-  //   },
-  //   function (err, user) {
-  //     if (err) {
-  //       console.log(err);
-  //       //return done(null, false, { msg: 'Cannot create Bank Account' });
-  //     }
-  //   }
-  // );
-
   next();
 });
 

@@ -3,18 +3,20 @@ var passport = require('passport');
 var { validationResult } = require('express-validator');
 var { validateUserSignup } = require('../services/auth/validator');
 
-var isAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) res.json(req.user);
-  res.redirect('/');
+var checkLogin = function (req, res, next) {
+  if (req.user) {
+    return res.redirect('/transfer');
+  }
+  next();
 };
 
-router.get('/', function (req, res, next) {
+router.get('/', checkLogin, function (req, res, next) {
   if (req.user) {
-    return res.json(req.user);
+    return res.redirect('/transer');
   } else res.render('signup', { title: 'Sign Up', hasError: false });
 });
 
-router.post('/', validateUserSignup(), (req, res, next) => {
+router.post('/', checkLogin, validateUserSignup(), (req, res, next) => {
   var errors = validationResult(req)
     .array()
     .map((error) => {
@@ -42,7 +44,7 @@ router.post('/', validateUserSignup(), (req, res, next) => {
       if (err) {
         return next(err);
       }
-      return res.json(user.email);
+      return res.redirect('/transfer');
     });
   })(req, res, next);
 });

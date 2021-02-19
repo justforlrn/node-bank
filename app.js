@@ -8,8 +8,6 @@ require('./services/auth/passport');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-var dbConfig = require('./models/database-config');
-var { User } = require('./models/user');
 
 var indexRouter = require('./routes/index');
 var signUpRouter = require('./routes/signup');
@@ -17,7 +15,7 @@ var transferRouter = require('./routes/transfer');
 
 var app = express();
 mongoose.connect(
-  dbConfig.database,
+  process.env.DATABASE_CONNECTSTRING,
   { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
   function (err) {
     if (err) console.log(err);
@@ -47,7 +45,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', indexRouter);
 app.use('/signup', signUpRouter);
 app.use('/transfer', transferRouter);
-
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

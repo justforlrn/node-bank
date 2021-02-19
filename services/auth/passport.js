@@ -2,8 +2,8 @@ var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var UserModel = require('../../models/user');
 var BankAccountModel = require('../../models/bank-account');
-var chalk = require('chalk');
-const bcrypt = require('bcryptjs');
+// var chalk = require('chalk');
+// const bcrypt = require('bcryptjs');
 
 passport.serializeUser(function (user, done) {
   done(null, user.email); //return from strategy
@@ -48,10 +48,6 @@ passport.use(
               user.save();
             }
           );
-          // console.log(
-          //   chalk.black.bgYellow('Added new user, email: ' + user.email)
-          // );
-          // user.save();
           return done(null, { email: email });
         }
       );
