@@ -13,23 +13,23 @@
 ### Deployment environment: HEROKU + MONGODB ATLAS
 ### Setting:
 - Clone Repository:
-``
+```
 - HTTPS: https://github.com/jeffreynerona/node-bank.git
 - SSH: git@github.com: justforlrn / node-bank.git
 - CLI: gh repo clone justforlrn / node-bank
-``
+```
 - Install packages in dependencies: npm install
 - Fix environment variables (env):
-``
+```
 PORT = 3000
 DATABASE_NAME =
 DATABASE_PASSWORD =
 DATABASE_CONNECTSTRING = mongodb: // localhost / node-bank
-``
+```
 - If using online database:
-``
+```
 DATABASE_CONNECTSTRING = mongodb + srv: // xxxxxxx: $ {process.env.DATABASE_PASSWORD} @ xxxxxxxxxxxxxxx $ {process.env.DATABASE_NAME} xxxxxxxxxxxxxxxx
-``
+```
 - npm start
 
 ## CONTACT:
