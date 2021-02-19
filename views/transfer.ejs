@@ -120,7 +120,7 @@
             var number = document.getElementById("input_number");
             axios
                 .get(
-                    `http://localhost:3000/transfer/get-holder?input_number=${number.value}`
+                    `/transfer/get-holder?input_number=${number.value}`
                 )
                 .then((res) => {
                     if (!res.data.hasError) {
