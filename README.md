@@ -1,4 +1,5 @@
 # Basic Bank NODE
+# ENGLISH TRANSLATE: https://github.com/justforlrn/node-bank/blob/master/README-EN.md
 ### LIVE DEMO: https://basic-node-bank.herokuapp.com/ 
 ### Tính năng:
 - ĐĂNG KÝ VÀ ĐĂNG NHẬP
