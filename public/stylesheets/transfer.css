@@ -38,3 +38,16 @@
   
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
   
+  @media (min-width: 300px) and (max-width: 360px) {
+    .table-bordered {
+      padding: 0px !important;
+      font-size: 10px !important;
+    }
+  }
+
+  @media (min-width: 370px) and (max-width: 450px) {
+    .table-bordered {
+      padding: 0px !important;
+      font-size: 14px !important;
+    }
+  }

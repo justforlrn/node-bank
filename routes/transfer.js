@@ -63,7 +63,7 @@ router
             fromAccount.bankAccount.save();
             toAccount.save();
           });
-        return res.json('success');
+        return res.redirect('/transfer');
       }
     );
   });
