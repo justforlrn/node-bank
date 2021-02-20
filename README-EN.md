@@ -37,5 +37,5 @@ DATABASE_CONNECTSTRING = mongodb + srv: // xxxxxxx: $ {process.env.DATABASE_PASS
 - Email: justforlrn@gmail.com
 
 ### SCREENSHOT:
-! [PC screenshot] (https://raw.githubusercontent.com/justforlrn/node-bank/master/public/images/app-screenshot/PC.png?v=4&s=200)
-! [Mobile screenshot] (https://raw.githubusercontent.com/justforlrn/node-bank/master/public/images/app-screenshot/Mobile.png) 
+![PC screenshot](https://raw.githubusercontent.com/justforlrn/node-bank/master/public/images/app-screenshot/PC.png?v=4&s=200)
+![Mobile screenshot](https://raw.githubusercontent.com/justforlrn/node-bank/master/public/images/app-screenshot/Mobile.png) 
