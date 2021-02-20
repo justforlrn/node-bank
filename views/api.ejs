@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="stylesheets/main-style.css" />
+    <link rel="stylesheet" href="stylesheets/bootstrap-4.5.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="stylesheets/fontawesome-free-5.15.0-web/css/all.css" />
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery-3.3.1.min.js"></script>
+    <script src="stylesheets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/fontawesome.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>API</title>
+</head>
+
+<body class="text-center">
+    <div class="container-fluid">
+        <div class="row menu-bar align-items-center row justify-content-center">
+            <a class="link" href="/document">Document</a>
+            <a class="link" href="/api">APIs</a>
+            <a class="link" href="/transfer">Transfer</a>
+            <% if(!error) { %>
+            <a class="link" href="/logout">Logout</a>
+            <% } %>
+        </div>
+        <div class="row menu-bar align-items-center justify-content-center">
+            <span class="pl-3 pr-3">Hello <%= user.name %></span>
+            <span class="pl-3 pr-3">Your bank number: <%= user.number %></span>
+            <span class="pl-3 pr-3">Balance: <%= user.balance %></span>
+        </div>
+        <div class="row main-content align-items-center justify-content-center">
+            <div class="col-8 col-sm-auto remove-right">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Your token</span>
+                    </div>
+                    <input type="text" class="form-control token" id="token"
+                        value="****************************************************************************">
+                </div>
+            </div>
+            <div class="col-12 col-sm-auto">
+                <div class="row align-items-center justify-content-center">
+                    <div class="text-center">
+                        <button onclick="getToken()" type="button" class="ml-1 btn btn-primary">CLICK</button>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="getData()" type="button" class="ml-1 btn btn-primary">GET DATA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main-content align-items-center justify-content-center">
+            <textarea class="user_data" id="user_data">
+            </textarea>
+        </div>
+    </div>
+
+    <!-- <div class="d-flex flex-column justify-content-between text-center" style="width: 100%;">
+        <div class="text-center">
+            <input type="text" id="token"
+                value="****************************************************************************" />
+        </div>
+
+        <div class="text-center">
+            <button onclick="getToken()" type="button" class="btn btn-primary">CLICK</button>
+        </div>
+        <div class="text-center">
+            <button onclick="getData()" type="button" class="btn btn-primary">CLICK</button>
+        </div>
+        <textarea class="user_data" id="user_data">
+
+        </textarea>
+
+    </div> -->
+
+    <script>
+        function getToken() {
+            var token = document.getElementById("token");
+            axios
+                .post(
+                    `/api`
+                )
+                .then((res) => {
+                    token.value = res.data.token
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
+        function getData() {
+            var token = document.getElementById("token");
+            var user_data = document.getElementById("user_data");
+            axios
+                .get(
+                    `/api/my-data`, {
+                        headers: {
+                            Authorization: 'bearer ' + token.value //the token is a variable which holds the token
+                        }
+                    })
+                .then((res) => {
+                    user_data.value = JSON.stringify(res.data);
+                    user_data.setAttribute("style", "display: block");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+    </script>
+</body>
+
+</html>

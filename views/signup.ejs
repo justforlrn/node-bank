@@ -4,54 +4,61 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="stylesheets/signin.css" />
+    <link rel="stylesheet" href="stylesheets/main-style.css" />
     <link rel="stylesheet" href="stylesheets/bootstrap-4.5.2-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="stylesheets/fontawesome-free-5.15.0-web/css/all.css" />
-    
+    <script src="javascripts/jquery-3.3.1.min.js"></script>
+    <script src="stylesheets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/fontawesome.min.js"></script>
     <title>
         <%= title %>
     </title>
 </head>
 
 <body class="text-center">
-    <form class="form-signin" method="POST">
-        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
-        <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
-        <input type="email" name="input_email" id="input_email" class="form-control" placeholder="Email address"
-            required autofocus>
-        <!-- <label for="inputPassword" class="sr-only">Password</label> -->
-        <input type="password" name="input_password" id="input_password" class="form-control" placeholder="Password"
-            required>
-        <input type="password" name="input_confirm_password" id="input_confirm_password" class="form-control"
-            placeholder="Confirm password" required>
-        <input type="text" name="input_name" id="input_name" class="form-control" placeholder="Full name" required>
+    <div class="container-fluid">
+        <div class="row menu-bar align-items-center justify-content-center">
+            <a class="link" href="/document">Document</a>
+            <a class="link" href="/api">APIs</a>
+            <a class="link" href="/transfer">Transfer</a>
         </div>
-        <% if (hasError) { errors.map(function(error) { %>
-            <label style="color:red !important; display: inherit !important; max-width:400px"><%= error %> </label> <% }) } %>
-        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Sign in</button>
-    </form>
-    <!-- Javascript/jquery files -->
-    <!-- Main javascript -->
-    <!-- Jquery -->
+        <div class="row main-content">
+            <form class="form-signin" method="POST">
+                <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+                <% if (hasError) { errors.map(function(error) { %>
+                <p style="color:red !important; display: inherit !important; max-width:400px"><%= error %> </p>
+                <% }) } %>
+                <input type="email" name="input_email" id="input_email" class="form-control" placeholder="Email address"
+                    required autofocus>
+                <input type="password" name="input_password" id="input_password" class="form-control"
+                    placeholder="Password" onchange="validatePassword()" required>
+                <input type="password" name="input_confirm_password" id="input_confirm_password" class="form-control"
+                    placeholder="Confirm password" onchange="validatePassword()" required>
+                <input type="text" name="input_name" id="input_name" class="form-control" placeholder="Full name"
+                    required>
+                <div class="row mt-2 text-left">
+                    <label class="col-4 pl-3 ml-2">
+                        <a href="/" style="color: yellow;">Sign in?</a>
+                    </label>
+                    <div class="col-6 ml-auto submit-button"><button class="btn btn-lg btn-primary btn-block"
+                            type="submit">Sign
+                            up</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        var password = document.getElementById('input_password');
-        var retypePassword = document.getElementById('input_confirm_password');
+        var input_password = document.getElementById('input_password');
+        var input_confirm_password = document.getElementById('input_confirm_password');
 
         function validatePassword() {
-            if (password.value != retypePassword.value) {
-                retypePassword.setCustomValidity('Passwords do not match');
-            } else retypePassword.setCustomValidity('');
+            if (input_password.value != input_confirm_password.value) {
+                input_confirm_password.setCustomValidity('Passwords do not match');
+            } else input_confirm_password.setCustomValidity('');
         }
-
-        password.onchange = validatePassword;
-        retypePassword.onchange = validatePassword;
     </script>
-    <script src="javascripts/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="stylesheets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-    <!-- Font awesome -->
-    <script src="javascripts/fontawesome.min.js"></script>
+
 </body>
 
 </html>

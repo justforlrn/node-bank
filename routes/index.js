@@ -1,12 +1,13 @@
 var router = require('express').Router();
 var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
 router.use('/', (req, res, next) => {
   if (req.session.visited) {
     return next();
   }
   req.session.visited = true;
-  return res.redirect('/guide');
+  return res.redirect('/document');
 });
 
 var checkLogin = function (req, res, next) {
@@ -16,8 +17,8 @@ var checkLogin = function (req, res, next) {
   next();
 };
 
-router.route('/guide').get((req, res, next) => {
-  res.render('guide');
+router.route('/document').get((req, res, next) => {
+  res.render('document');
 });
 
 router.get('/', checkLogin, function (req, res, next) {

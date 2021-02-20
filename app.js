@@ -12,6 +12,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var signUpRouter = require('./routes/signup');
 var transferRouter = require('./routes/transfer');
+var apiRouter = require('./routes/api');
 
 var app = express();
 mongoose.connect(
@@ -45,10 +46,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', indexRouter);
 app.use('/signup', signUpRouter);
 app.use('/transfer', transferRouter);
+
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
+app.use('/api', apiRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

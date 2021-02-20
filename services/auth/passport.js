@@ -1,9 +1,15 @@
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var passportJWT = require('passport-jwt');
+var ExtractJwt = passportJWT.ExtractJwt;
+var JwtStrategy = passportJWT.Strategy;
+
+var JWTOptions = {
+  secretKey: 'my_secret_key',
+};
+
 var UserModel = require('../../models/user');
 var BankAccountModel = require('../../models/bank-account');
-// var chalk = require('chalk');
-// const bcrypt = require('bcryptjs');
 
 passport.serializeUser(function (user, done) {
   done(null, user.email); //return from strategy
@@ -22,7 +28,7 @@ passport.use(
     {
       usernameField: 'input_email',
       passwordField: 'input_password',
-      passReqToCallback: true, //Cho phép truy cập các giá trị của req gửi lên
+      passReqToCallback: true,
     },
     (req, email, password, done) => {
       UserModel.create(
@@ -76,3 +82,26 @@ passport.use(
     }
   )
 );
+
+passport.use(
+  'jwt',
+  new JwtStrategy(
+    {
+      secretOrKey: JWTOptions.secretKey,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    },
+    (payload, done) => {
+      UserModel.findOne({ email: payload.email })
+        .populate('bankAccount')
+        .exec((err, user) => {
+          if (err) console.log(err);
+          if (user) return done(null, user);
+          else return done(null, false);
+        });
+    }
+  )
+);
+
+module.exports = {
+  JWTOptions,
+};

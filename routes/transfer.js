@@ -14,17 +14,25 @@ router.use('/', checkLogin);
 router
   .route('/')
   .get((req, res, next) => {
-    UserModel.findOne({ email: req.user.email }, '_id name')
+    UserModel.findOne(
+      {
+        email: req.user.email,
+      },
+      '_id name'
+    )
       .populate('bankAccount', '_id number balance transfers')
       .exec((err, account) => {
         res.render('transfer', {
+          error: false,
           title: 'Transfer',
-          name: account.name,
-          number: account.bankAccount.number,
-          balance: account.bankAccount.balance,
-          hasError: false,
-          transfer: account.bankAccount.transfers.length > 0 ? true : false,
-          transfers: account.bankAccount.transfers,
+          user: {
+            name: account.name,
+            number: account.bankAccount.number,
+            balance: account.bankAccount.balance,
+            hasTransfer:
+              account.bankAccount.transfers.length > 0 ? true : false,
+            transfers: account.bankAccount.transfers,
+          },
         });
       });
   })
@@ -32,13 +40,20 @@ router
     var bankNumber = req.body.input_number;
     var transferValue = Number.parseInt(req.body.input_value, 10);
     BankAccountModel.findOne(
-      { number: bankNumber },
+      {
+        number: bankNumber,
+      },
       async function (err, toAccount) {
         console.log('toAccount');
         console.log(toAccount);
         if (err) console.log(err);
         toAccount.balance += transferValue;
-        UserModel.findOne({ email: req.user.email }, '_id')
+        UserModel.findOne(
+          {
+            email: req.user.email,
+          },
+          '_id'
+        )
           .populate('bankAccount', '_id number balance transfers')
           .exec(function (err, fromAccount) {
             console.log('fromAccount');
@@ -70,36 +85,23 @@ router
 
 router.get('/get-holder', function (req, res) {
   BankAccountModel.findOne(
-    { number: req.query.input_number },
+    {
+      number: req.query.input_number,
+    },
     function (err, account) {
       if (err) console.log(err);
       if (!account) {
-        return res.json({ hasError: true, msg: 'Account dose not exist' });
+        return res.json({
+          hasError: true,
+          msg: 'Account dose not exist',
+        });
       }
-      res.json({ hasError: false, name: account.name });
+      res.json({
+        hasError: false,
+        name: account.name,
+      });
     }
   );
-  // UserModel.findOne(
-  //   { 'bankAccount.number': req.query.bank_number },
-  //   (err, user) => {
-  //     if (err) console.log(err);
-  //     if (!user) {
-  //       console.log(user);
-  //       console.log('B');
-  //       return res.json({ hasError: true, msg: 'Account dose not exist' });
-  //     }
-  //     console.log('A');
-  //     res.json({ hasError: false, holder: user.fullName });
-  //   }
-  // );
-  // BankAccountModel.findOne({ number: req.query.bank_number })
-  //   .populate('holdName')
-  //   .exec((err, account) => {
-  //     if (err) console.log(err);
-  //     if (!account)
-  //       return res.json({ hasError: true, msg: 'Account dose not exist' });
-  //     res.json({ hasError: false, holder: account.holdName.fullName });
-  //   });
 });
 
 module.exports = router;

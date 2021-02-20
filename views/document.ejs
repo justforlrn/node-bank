@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="stylesheets/main-style.css" />
+  <link rel="stylesheet" href="stylesheets/bootstrap-4.5.2-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="stylesheets/fontawesome-free-5.15.0-web/css/all.css" />
+  <script src="javascripts/jquery-3.3.1.min.js"></script>
+  <script src="stylesheets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+  <script src="javascripts/fontawesome.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body class="text-center">
+  <div class="container-fluid">
+    <div class="row menu-bar align-items-center justify-content-center">
+      <a class="link" href="/document">Document</a>
+      <a class="link" href="/api">APIs</a>
+      <a class="link" href="/transfer">Transfer</a>
+    </div>
+  </div>
+  <div class="row main-content align-items-center justify-content-center">
+    <div class="text-content">
+      Maybe this is your first visit and maybe you need help 
+      <p class="text-break">The first, you must have an account to make the transfer.</p>
+      <p class="text-break">Using email to create an account, with a password of at least <a style="color:red">9 characters and at least one uppercase character</a>.
+        </p>
+        <p class="text-break">Example (email/password): <a style="color:red">Email: example@email.com/Abc123123</a></p>
+      
+      
+        <p class="text-break">After registered, you will see your <a style="color:red">bank number/balance</a> at the top, use it to receive or transfer money and check the transaction history below.</p>
+          <p class="text-break">Here are 2 accounts for testing: </p>
+          <p class="text-break"><a style="color:rgb(0, 255, 0)">test1@email.com/Password123123</a></p>
+          <a style="color:rgb(0, 255, 0)">test2@email.com/Password123123</a>
+          <p class="text-break"></p>
+          Currently, you can use token and <a style="color:rgb(0, 255, 0)">APIs</a> to see all of your personal information (Note: the returned data is in json type) 
+          <p class="text-break"></p>
+          <p class="text-break">***How to use:***</p>
+          After logged in, go to "<a style="color:red">hostname</a>/api" and get the token, you can press <a style="color:rgb(0, 255, 0)">GETDATA</a> button to test
+          or use an external tool by sending a request to the URL "<a style="color:red">hostname</a>/api/my-data"
+          by the method <a style="color:rgb(0, 255, 0)">POST</a> and attach token in <a style="color:red">header authorization bearer</a>
+          <p class="text-break"></p>
+          <p class="text-break">More information:</p>
+          <p class="text-break"><a href="https://www.facebook.com/theworldsname/">https://www.facebook.com/theworldsname/</a></p>
+          <p class="text-break">justforlrn@gmail.com</p>
+          <p class="text-break"><a href="https://github.com/justforlrn/node-bank/">https://github.com/justforlrn/node-bank/</a></p>
+    </div>
+  </div>
+  <div class="row main-content align-items-center justify-content-center">
+    <input class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='/'" style="max-width: 300px;font-size: 20px;" value="Click to continue " />
+  </div>
+</body>
+
+</html>
