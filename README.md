@@ -40,7 +40,8 @@ DATABASE_CONNECTSTRING = mongodb+srv://xxxxxxx:${process.env.DATABASE_PASSWORD}@
 ```
 - npm start
 
-## API: After logged in, go to "hostname/api" and get the token, you can press GETDATA button to test or use an external tool by sending a request to the URL "hostname/api/my-data" by the method POST and attach token in header authorization bearer
+## API:
+After logged in, go to "hostname/api" and get the token, you can press GETDATA button to test or use an external tool by sending a request to the URL "hostname/api/my-data" by the method POST and attach token in header authorization bearer
 
 ## CONTACT:
 - FB: https://www.facebook.com/theworldsname/
