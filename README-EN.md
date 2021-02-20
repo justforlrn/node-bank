@@ -1,8 +1,14 @@
-# Basic Bank NODE
+# Basic Bank NODE (Still in development)
 ### LIVE DEMO: https://basic-node-bank.herokuapp.com/
+Here are 2 accounts for testing:
+```
+test1@email.com/Password123123
+test2@email.com/Password123123
+```
 ### Feature:
 - REGISTER AND LOGIN
 - TRANSFER
+- USING API TO GET ALL OF A ACCOUNT INFORMATION
 ### Library:
 - ExpressJS (Controller, routing, API)
 - EJS views (View)
@@ -10,6 +16,7 @@
 - Mongodb / Atlas (Offline / Online Database by MongoDB)
 - PassportJS (Authenticate account)
 - Express-validator (Middleware verifies data at Backend)
+- JWT
 ### Deployment environment: HEROKU + MONGODB ATLAS
 ### Setting:
 - Clone Repository:
@@ -31,6 +38,9 @@ DATABASE_CONNECTSTRING = mongodb: // localhost / node-bank
 DATABASE_CONNECTSTRING = mongodb + srv: // xxxxxxx: $ {process.env.DATABASE_PASSWORD} @ xxxxxxxxxxxxxxx $ {process.env.DATABASE_NAME} xxxxxxxxxxxxxxxx
 ```
 - npm start
+
+## API:
+After logged in, go to "hostname/api" and get the token, you can press GETDATA button to test or use an external tool by sending a request to the URL "hostname/api/my-data" by the method POST and attach token in header authorization bearer
 
 ## CONTACT:
 - FB: https://www.facebook.com/theworldsname/
