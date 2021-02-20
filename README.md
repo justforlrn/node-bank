@@ -1,6 +1,11 @@
 # Basic Bank NODE (Still in development)
 # ENGLISH TRANSLATE: https://github.com/justforlrn/node-bank/blob/master/README-EN.md
 ### LIVE DEMO: https://basic-node-bank.herokuapp.com/ 
+Here are 2 accounts for testing:
+```
+test1@email.com/Password123123
+test2@email.com/Password123123
+```
 ### Tính năng:
 - ĐĂNG KÝ VÀ ĐĂNG NHẬP
 - CHUYỂN KHOẢN
